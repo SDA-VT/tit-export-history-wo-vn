@@ -190,20 +190,20 @@ export default function Homes() {
   const [valueShift, setValueShift] = useState<any>("All");
   console.log("valueShift", valueShift);
   const router = useRouter();
-  useEffect(() => {
-    const fetchCheckID = async () => {
-      let { data: userID, error } = await supabase
-        .from("userID")
-        .select("emp_no")
-        .eq("emp_no", localStorage.getItem("emp_no"));
-      if (userID?.length != 0) {
-        console.log("Check ID OK :D");
-      } else {
-        router.push("www.google.com");
-      }
-    };
-    fetchCheckID();
-  }, []);
+  //   useEffect(() => {
+  //     const fetchCheckID = async () => {
+  //       let { data: userID, error } = await supabase
+  //         .from("userID")
+  //         .select("emp_no")
+  //         .eq("emp_no", localStorage.getItem("emp_no"));
+  //       if (userID?.length != 0) {
+  //         console.log("Check ID OK :D");
+  //       } else {
+  //         router.push("www.google.com");
+  //       }
+  //     };
+  //     fetchCheckID();
+  //   }, []);
   const currentDate = `${year}-${month}-${day}`;
   const [dataShow, setDataShow] = useState<any>([]);
   //   console.log("dataShow", dataShow);
