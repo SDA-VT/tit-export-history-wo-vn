@@ -23,6 +23,17 @@ import MenuItem from "@mui/material/MenuItem";
 import FormControl from "@mui/material/FormControl";
 import Select, { SelectChangeEvent } from "@mui/material/Select";
 import { useRouter } from "next/router";
+import Paper from "@mui/material/Paper";
+import Grid from "@mui/material/Grid";
+import { styled } from "@mui/material/styles";
+
+const Item = styled(Paper)(({ theme }) => ({
+  backgroundColor: theme.palette.mode === "dark" ? "#1A2027" : "#fff",
+  ...theme.typography.body2,
+  padding: theme.spacing(1),
+  textAlign: "center",
+  color: theme.palette.text.secondary,
+}));
 
 function CustomToolbar() {
   return (
@@ -38,6 +49,7 @@ function CustomToolbar() {
           height: 60,
         }}
       >
+        {" "}
         <GridToolbarContainer>
           <GridToolbarColumnsButton />
           <GridToolbarFilterButton />
@@ -282,52 +294,60 @@ export default function Homes() {
 
   return (
     <>
-      <Box sx={{ m: 5 }}>
-        <Stack direction="row" spacing={2}>
-          <Typography variant="h3" gutterBottom>
-            TIT Export file Production History
-          </Typography>
-          <LocalizationProvider dateAdapter={AdapterDayjs}>
-            <DatePicker
-              label="Start"
-              value={valueStart}
-              onChange={(newValue) => setValueStart(newValue)}
-            />
-          </LocalizationProvider>
-          <LocalizationProvider dateAdapter={AdapterDayjs}>
-            <DatePicker
-              label="End"
-              value={valueEnd}
-              onChange={(newValue) => setValueEnd(newValue)}
-            />
-          </LocalizationProvider>
-
-          <Box sx={{ minWidth: 120 }}>
-            <FormControl fullWidth>
-              <InputLabel id="demo-multiple-name-label">Shift</InputLabel>
-              <Select
-                labelId="demo-multiple-name-label"
-                id="demo-multiple-name"
-                value={valueShift}
-                label="All"
-                onChange={(e) => setValueShift(e.target.value)}
-              >
-                <MenuItem value={"All"}>All</MenuItem>
-                <MenuItem value={"Day"}>Day</MenuItem>
-                <MenuItem value={"Night"}>Night</MenuItem>
-              </Select>
-            </FormControl>
-          </Box>
-
-          <Button
-            variant="contained"
-            onClick={handleOnExport}
-            color="success"
-            sx={{ width: 210, height: 55 }}
-          >
-            Export Excel
-          </Button>
-        </Stack>
+      <Box sx={{ flexGrow: 1, m: 5 }}>
+        <Grid container spacing={2}>
+          <Grid item xs={12} lg={5}>
+            <Typography variant="h3" gutterBottom>
+              TIT Export file Production History
+            </Typography>
+          </Grid>
+          <Grid item xs={6} lg={2}>
+            <LocalizationProvider dateAdapter={AdapterDayjs}>
+              <DatePicker
+                label="Start"
+                value={valueStart}
+                onChange={(newValue) => setValueStart(newValue)}
+              />
+            </LocalizationProvider>
+          </Grid>
+          <Grid item xs={6} lg={2}>
+            <LocalizationProvider dateAdapter={AdapterDayjs}>
+              <DatePicker
+                label="End"
+                value={valueEnd}
+                onChange={(newValue) => setValueEnd(newValue)}
+              />
+            </LocalizationProvider>
+          </Grid>
+          <Grid item xs={6} lg={1}>
+            <Box sx={{ minWidth: 120 }}>
+              <FormControl fullWidth>
+                <InputLabel id="demo-multiple-name-label">Shift</InputLabel>
+                <Select
+                  labelId="demo-multiple-name-label"
+                  id="demo-multiple-name"
+                  value={valueShift}
+                  label="All"
+                  onChange={(e) => setValueShift(e.target.value)}
+                >
+                  <MenuItem value={"All"}>All</MenuItem>
+                  <MenuItem value={"Day"}>Day</MenuItem>
+                  <MenuItem value={"Night"}>Night</MenuItem>
+                </Select>
+              </FormControl>
+            </Box>
+          </Grid>
+          <Grid item xs={6} lg={2}>
+            <Button
+              variant="contained"
+              onClick={handleOnExport}
+              color="success"
+              sx={{ width: "100%", height: 55 }}
+            >
+              Export Excel
+            </Button>
+          </Grid>
+        </Grid>
       </Box>
       <Box sx={{ p: 2, height: 650, width: "100%", display: "flow" }}>
         <DataGrid
