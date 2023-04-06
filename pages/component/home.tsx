@@ -218,7 +218,7 @@ export default function Homes() {
   //   }, []);
   const currentDate = `${year}-${month}-${day}`;
   const [dataShow, setDataShow] = useState<any>([]);
-  //   console.log("dataShow", dataShow);
+  console.log("dataShow", dataShow);
 
   const [valueStart, setValueStart] = useState<Dayjs | null>(
     dayjs(currentDate)
@@ -235,7 +235,8 @@ export default function Homes() {
           .eq("OBU_status", "Transfer_done")
           .filter("Shift", "in", '("Day","Night")')
           .gte("Production_date", dayjs(valueStart).format("YYYY-MM-DD"))
-          .lte("Production_date", dayjs(valueEnd).format("YYYY-MM-DD"));
+          .lte("Production_date", dayjs(valueEnd).format("YYYY-MM-DD"))
+          .order("PD_key", { ascending: true });
         if (!error) {
           console.log("fetch Success :D", Production_history);
           setDataShow(Production_history);
@@ -254,7 +255,8 @@ export default function Homes() {
           .eq("OBU_status", "Transfer_done")
           .filter("Shift", "in", '("Day")')
           .gte("Production_date", dayjs(valueStart).format("YYYY-MM-DD"))
-          .lte("Production_date", dayjs(valueEnd).format("YYYY-MM-DD"));
+          .lte("Production_date", dayjs(valueEnd).format("YYYY-MM-DD"))
+          .order("PD_key", { ascending: true });
         if (!error) {
           console.log("fetch Success :D", Production_history);
           setDataShow(Production_history);
@@ -273,7 +275,8 @@ export default function Homes() {
           .eq("OBU_status", "Transfer_done")
           .filter("Shift", "in", '("Night")')
           .gte("Production_date", dayjs(valueStart).format("YYYY-MM-DD"))
-          .lte("Production_date", dayjs(valueEnd).format("YYYY-MM-DD"));
+          .lte("Production_date", dayjs(valueEnd).format("YYYY-MM-DD"))
+          .order("PD_key", { ascending: true });
         if (!error) {
           console.log("fetch Success :D", Production_history);
           setDataShow(Production_history);
@@ -297,13 +300,14 @@ export default function Homes() {
       <Box sx={{ flexGrow: 1, m: 5 }}>
         <Grid container spacing={2}>
           <Grid item xs={12} lg={5}>
-            <Typography variant="h3" gutterBottom>
+            <Typography variant="h3" gutterBottom align="center">
               TIT Export file Production History
             </Typography>
           </Grid>
           <Grid item xs={6} lg={2}>
             <LocalizationProvider dateAdapter={AdapterDayjs}>
               <DatePicker
+                sx={{ width: "100%" }}
                 label="Start"
                 value={valueStart}
                 onChange={(newValue) => setValueStart(newValue)}
@@ -313,6 +317,7 @@ export default function Homes() {
           <Grid item xs={6} lg={2}>
             <LocalizationProvider dateAdapter={AdapterDayjs}>
               <DatePicker
+                sx={{ width: "100%" }}
                 label="End"
                 value={valueEnd}
                 onChange={(newValue) => setValueEnd(newValue)}
