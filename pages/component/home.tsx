@@ -286,7 +286,7 @@ export default function Homes() {
       };
       fetchdataNight();
     }
-  }, [valueEnd, valueShift]);
+  }, [valueStart, valueEnd, valueShift]);
 
   const handleOnExport = () => {
     let wb = XLSX.utils.book_new();
