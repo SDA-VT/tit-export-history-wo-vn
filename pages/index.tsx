@@ -9,7 +9,7 @@ export default function Home() {
   return (
     <>
       <Head>
-        <title>TIT Export file Monitoring</title>
+        <title>TIT Export file Monitoring VN</title>
         <meta name="description" content="Export file History" />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <link rel="icon" href="/favicon.ico" />

@@ -16,7 +16,7 @@ import { DatePicker } from "@mui/x-date-pickers/DatePicker";
 import dayjs, { Dayjs } from "dayjs";
 import { LocalizationProvider } from "@mui/x-date-pickers/LocalizationProvider";
 import Button from "@mui/material/Button";
-import supabase from "@/comporment config/supabase";
+import supabase from "../../comporment_config/supabase";
 import * as XLSX from "xlsx";
 import InputLabel from "@mui/material/InputLabel";
 import MenuItem from "@mui/material/MenuItem";
@@ -220,12 +220,14 @@ export default function Homes() {
   //   console.log("valueEnd", dayjs(valueEnd).format("YYYY-MM-DD"));
 
   useEffect(() => {
+    //============ รอ OBU มาแล้วค่อยเปลี่ยนกลับไปใช้  Transfer_done (OBU_status)d
+
     if (valueShift == "All") {
       const fetchdataALL = async () => {
         let { data: Production_history, error } = await supabase
           .from("Production_history")
           .select("*")
-          .eq("OBU_status", "Transfer_done")
+          .eq("OBU_status", "Waiting_transfer")
           .filter("Shift", "in", '("Day","Night")')
           .gte("Production_date", dayjs(valueStart).format("YYYY-MM-DD"))
           .lte("Production_date", dayjs(valueEnd).format("YYYY-MM-DD"))
@@ -245,7 +247,7 @@ export default function Homes() {
         let { data: Production_history, error } = await supabase
           .from("Production_history")
           .select("*")
-          .eq("OBU_status", "Transfer_done")
+          .eq("OBU_status", "Waiting_transfer")
           .filter("Shift", "in", '("Day")')
           .gte("Production_date", dayjs(valueStart).format("YYYY-MM-DD"))
           .lte("Production_date", dayjs(valueEnd).format("YYYY-MM-DD"))
@@ -265,7 +267,7 @@ export default function Homes() {
         let { data: Production_history, error } = await supabase
           .from("Production_history")
           .select("*")
-          .eq("OBU_status", "Transfer_done")
+          .eq("OBU_status", "Waiting_transfer")
           .filter("Shift", "in", '("Night")')
           .gte("Production_date", dayjs(valueStart).format("YYYY-MM-DD"))
           .lte("Production_date", dayjs(valueEnd).format("YYYY-MM-DD"))
@@ -294,7 +296,7 @@ export default function Homes() {
         <Grid container spacing={2}>
           <Grid item xs={12} lg={5}>
             <Typography variant="h3" gutterBottom align="center">
-              TIT Export file Production History
+              TIT VN Export file Production History
             </Typography>
           </Grid>
           <Grid item xs={6} lg={2}>
