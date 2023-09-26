@@ -227,7 +227,7 @@ export default function Homes() {
         let { data: Production_history, error } = await supabase
           .from("Production_history")
           .select("*")
-          .eq("OBU_status", "Waiting_transfer")
+          // .eq("OBU_status", "Waiting_transfer")
           .filter("Shift", "in", '("Day","Night")')
           .gte("Production_date", dayjs(valueStart).format("YYYY-MM-DD"))
           .lte("Production_date", dayjs(valueEnd).format("YYYY-MM-DD"))
